@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "ecmaVersion": "esnext",
+  "sourceType": "module",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "esnext",
+    ],
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["./src/**/*", "twin.d.ts", "static/admin"],
+  "exclude": ["node_modules", "public", ".cache"]
+}

@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: svirins/iam
+  branch: main
+
+
+media_folder: static/img
+public_folder: /img
+
+
+collections:
+  - name: "page"
+    label: "Page"
+    folder: "src/content"
+    create: true
+    slug: "{{title}}" 
+    fields:
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Frontimage", name: "frontimage", widget: "image"}
+      - {label: "Price", name: "price", widget: "number", required: true}
+      - {label: "Text", name: "text", widget: "markdown", required: true}
+
+
