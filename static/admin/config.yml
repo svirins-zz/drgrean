@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: svirins/iam
+  repo: svirins/drgrean
   branch: main
 
 
@@ -9,15 +9,30 @@ public_folder: /img
 
 
 collections:
-  - name: "page"
-    label: "Page"
-    folder: "src/content"
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/posts"
     create: true
     slug: "{{title}}" 
     fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
       - {label: "Title", name: "title", widget: "string", required: true}
-      - {label: "Frontimage", name: "frontimage", widget: "image"}
-      - {label: "Price", name: "price", widget: "number", required: true}
-      - {label: "Text", name: "text", widget: "markdown", required: true}
-
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - label: "Tags"
+          name: "tags"
+          widget: "list"
+          allow_add: true
+          field: {name: tag, label: Tag, widget: string}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "page"
+    label: "Page"
+    folder: "src/content/pages"
+    create: true
+    slug: "{{title}}" 
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Body", name: "body", widget: "markdown"}
 

@@ -7,7 +7,7 @@ module.exports = {
     title: "Gatsby IAM",
     description: "Gatsby + TypeScript + Tailwind CSS + Emotion = IAM",
     author: "@svirins",
-    siteURL: "https://deezign.cf",
+    siteURL: "https://addict.cf",
   },
   flags: {
     PRESERVE_WEBPACK_CACHE: true,
@@ -62,7 +62,7 @@ module.exports = {
         short_name: "I AM",
         start_url: "/",
         display: "browser",
-        icon: "src/assets/svg/idea.svg",
+        icon: "src/assets/svg/favicon.svg",
       },
     },
     {
