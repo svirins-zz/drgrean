@@ -1,19 +1,17 @@
 import "styles/body-classes.css";
 
-import { SEO_PER_PAGE } from "const";
 import { myContext } from "context";
 import { graphql, useStaticQuery } from "gatsby";
 import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
 
-import { SeoProps } from "@types";
-
 export const SEO = ({
-  description = "",
-  lang = "en",
-  meta = [],
-  title,
-}: SeoProps): JSX.Element => {
+  seoTitle,
+  seoDescription,
+}: {
+  seoTitle: string;
+  seoDescription: string;
+}): JSX.Element => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -22,6 +20,7 @@ export const SEO = ({
             title
             description
             author
+            lang
           }
         }
       }
@@ -32,27 +31,29 @@ export const SEO = ({
     context.menuVisible?.isVisible || context.modalVisible?.isVisible
       ? "scroll-off"
       : "scroll-on";
-  const metaDescription = description || site.siteMetadata.description;
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang: site.siteMetadata.lang ?? "en",
       }}
       bodyAttributes={{ class: className }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={`${site.siteMetadata.title} | ${seoTitle}`}
       meta={[
         {
+          name: `charSet`,
+          content: "utf-8",
+        },
+        {
           name: `description`,
-          content: metaDescription,
+          content: seoDescription ?? site.siteMetadata.description,
         },
         {
           property: `og:title`,
-          content: title,
+          content: seoTitle ?? site.siteMetadata.title,
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: seoDescription ?? site.siteMetadata.description,
         },
         {
           property: `og:type`,
@@ -68,13 +69,13 @@ export const SEO = ({
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: seoTitle ?? site.siteMetadata.title,
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: seoDescription ?? site.siteMetadata.description,
         },
-      ].concat(meta)}
+      ]}
     />
   );
 };

@@ -1,20 +1,16 @@
-import { PageLayout, SEO } from "components/layout";
-
-import { Footer, PageContainer } from "components/ui";
+import { Footer, PageLayout, SEO } from "components/layout";
 import React from "react";
 
 import styled from "@emotion/styled";
 
-
 export const Page = (data): JSX.Element => {
-  const { frontmatter } = data.pageData.allMarkdownRemark.edges[0].node;
   return (
     <>
       <SEO title="Design" />
-      <PageContainer>
-        
+      <PageLayout>
+        Wow
         <Footer />
-      </PageContainer>
+      </PageLayout>
     </>
   );
 };

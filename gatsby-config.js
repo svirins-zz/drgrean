@@ -6,8 +6,9 @@ module.exports = {
   siteMetadata: {
     title: "Gatsby IAM",
     description: "Gatsby + TypeScript + Tailwind CSS + Emotion = IAM",
-    author: "@svirins",
+    author: "dr. Grean",
     siteURL: "https://addict.cf",
+    lang: "ru",
   },
   flags: {
     PRESERVE_WEBPACK_CACHE: true,
@@ -29,6 +30,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
+    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
@@ -40,13 +48,6 @@ module.exports = {
       options: {
         name: "images",
         path: `${__dirname}/src/assets`,
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "uploads",
-        path: `${__dirname}/static/img`,
       },
     },
     {
@@ -62,7 +63,7 @@ module.exports = {
         short_name: "I AM",
         start_url: "/",
         display: "browser",
-        icon: "src/assets/svg/favicon.svg",
+        icon: "src/assets/favicon.svg",
       },
     },
     {
@@ -89,15 +90,12 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          `gatsby-remark-relative-images`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               options: {
                 maxWidth: 1024,
                 linkImagesToOriginal: false,
-                withWebp: true,
-                loading: "lazy",
               },
             },
           },
@@ -107,15 +105,8 @@ module.exports = {
               background: "#101010",
             },
           },
-          {
-            resolve: `gatsby-plugin-netlify-cms-paths`,
-            options: {
-              cmsConfig: `/static/admin/config.yml`,
-            },
-          },
         ],
       },
     },
-    `gatsby-plugin-netlify-cms`,
   ],
 };

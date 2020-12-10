@@ -17,7 +17,21 @@ export interface ImageProps {
   alt: string;
   url: string;
 }
+export type ContextProps = {
+  menuVisible: { isVisible: boolean };
+  modalVisible: { isVisible: boolean };
+  handleSelect: () => void;
+  closeMenu: () => void;
+  showMenu: () => void;
+  showModal: () => void;
+  closeModal: () => void;
+};
 
 export interface AuxProps {
   children: ReactChild | ReactChildren;
+}
+
+export interface MenuItem {
+  name: string;
+  link: string;
 }
