@@ -1,6 +1,2 @@
-export { Footer } from "./footer";
-export { PageLayout } from "./pageLayout";
-export { MainMenu } from "./mainMenu";
-export { FormModal } from "./formModal";
-export { FooterMenu } from "./footerMenu";
+export { Layout } from "./layout";
 export { SEO } from "./seo";

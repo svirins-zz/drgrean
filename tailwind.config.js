@@ -8,12 +8,10 @@ module.exports = {
       mono: ["Montserrat", "sans-serif"],
     },
   },
-  variants: {
-    gridTemplateColumns: ["responsive", "hover", "focus"],
-  },
   plugins: [
     require("tailwindcss"),
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
+    require("tailwind-nord"),
   ],
 };

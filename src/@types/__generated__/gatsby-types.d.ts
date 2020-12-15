@@ -395,6 +395,7 @@ type ContentfulAuthor = ContentfulReference & ContentfulEntry & Node & {
   readonly id: Scalars['ID'];
   readonly node_locale: Scalars['String'];
   readonly name: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
   readonly social: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly featured: Maybe<Scalars['Boolean']>;
   readonly avatar: Maybe<ContentfulAsset>;
@@ -458,6 +459,7 @@ enum ContentfulAuthorFieldsEnum {
   id = 'id',
   node_locale = 'node_locale',
   name = 'name',
+  slug = 'slug',
   social = 'social',
   featured = 'featured',
   avatar___contentful_id = 'avatar.contentful_id',
@@ -563,6 +565,7 @@ enum ContentfulAuthorFieldsEnum {
   post___author___id = 'post.author.id',
   post___author___node_locale = 'post.author.node_locale',
   post___author___name = 'post.author.name',
+  post___author___slug = 'post.author.slug',
   post___author___social = 'post.author.social',
   post___author___featured = 'post.author.featured',
   post___author___avatar___contentful_id = 'post.author.avatar.contentful_id',
@@ -1059,6 +1062,7 @@ type ContentfulAuthorFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly node_locale: Maybe<StringQueryOperatorInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
+  readonly slug: Maybe<StringQueryOperatorInput>;
   readonly social: Maybe<StringQueryOperatorInput>;
   readonly featured: Maybe<BooleanQueryOperatorInput>;
   readonly avatar: Maybe<ContentfulAssetFilterInput>;
@@ -1925,6 +1929,7 @@ enum ContentfulPostFieldsEnum {
   author___id = 'author.id',
   author___node_locale = 'author.node_locale',
   author___name = 'author.name',
+  author___slug = 'author.slug',
   author___social = 'author.social',
   author___featured = 'author.featured',
   author___avatar___contentful_id = 'author.avatar.contentful_id',
@@ -2005,6 +2010,7 @@ enum ContentfulPostFieldsEnum {
   author___post___author___id = 'author.post.author.id',
   author___post___author___node_locale = 'author.post.author.node_locale',
   author___post___author___name = 'author.post.author.name',
+  author___post___author___slug = 'author.post.author.slug',
   author___post___author___social = 'author.post.author.social',
   author___post___author___featured = 'author.post.author.featured',
   author___post___author___post = 'author.post.author.post',
@@ -2327,6 +2333,7 @@ enum ContentfulPostFieldsEnum {
   tags___post___author___id = 'tags.post.author.id',
   tags___post___author___node_locale = 'tags.post.author.node_locale',
   tags___post___author___name = 'tags.post.author.name',
+  tags___post___author___slug = 'tags.post.author.slug',
   tags___post___author___social = 'tags.post.author.social',
   tags___post___author___featured = 'tags.post.author.featured',
   tags___post___author___post = 'tags.post.author.post',
@@ -2975,6 +2982,7 @@ enum ContentfulTagFieldsEnum {
   post___author___id = 'post.author.id',
   post___author___node_locale = 'post.author.node_locale',
   post___author___name = 'post.author.name',
+  post___author___slug = 'post.author.slug',
   post___author___social = 'post.author.social',
   post___author___featured = 'post.author.featured',
   post___author___avatar___contentful_id = 'post.author.avatar.contentful_id',
@@ -5225,6 +5233,7 @@ type Query_sitePageArgs = {
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  context: Maybe<SitePageContextFilterInput>;
   pluginCreator: Maybe<SitePluginFilterInput>;
   pluginCreatorId: Maybe<StringQueryOperatorInput>;
   componentPath: Maybe<StringQueryOperatorInput>;
@@ -5354,6 +5363,7 @@ type Query_contentfulAuthorArgs = {
   id: Maybe<StringQueryOperatorInput>;
   node_locale: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
+  slug: Maybe<StringQueryOperatorInput>;
   social: Maybe<StringQueryOperatorInput>;
   featured: Maybe<BooleanQueryOperatorInput>;
   avatar: Maybe<ContentfulAssetFilterInput>;
@@ -5715,6 +5725,7 @@ enum SiteFieldsEnum {
   siteMetadata___author = 'siteMetadata.author',
   siteMetadata___siteURL = 'siteMetadata.siteURL',
   siteMetadata___lang = 'siteMetadata.lang',
+  siteMetadata___keywords = 'siteMetadata.keywords',
   port = 'port',
   host = 'host',
   flags___PRESERVE_WEBPACK_CACHE = 'flags.PRESERVE_WEBPACK_CACHE',
@@ -5850,6 +5861,7 @@ type SitePage = Node & {
   readonly children: ReadonlyArray<Node>;
   readonly internal: Internal;
   readonly isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
+  readonly context: Maybe<SitePageContext>;
   readonly pluginCreator: Maybe<SitePlugin>;
   readonly pluginCreatorId: Maybe<Scalars['String']>;
   readonly componentPath: Maybe<Scalars['String']>;
@@ -5874,6 +5886,14 @@ type SitePageConnection_groupArgs = {
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
   field: SitePageFieldsEnum;
+};
+
+type SitePageContext = {
+  readonly slug: Maybe<Scalars['String']>;
+};
+
+type SitePageContextFilterInput = {
+  readonly slug: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePageEdge = {
@@ -5975,6 +5995,7 @@ enum SitePageFieldsEnum {
   internal___owner = 'internal.owner',
   internal___type = 'internal.type',
   isCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
+  context___slug = 'context.slug',
   pluginCreator___id = 'pluginCreator.id',
   pluginCreator___parent___id = 'pluginCreator.parent.id',
   pluginCreator___parent___parent___id = 'pluginCreator.parent.parent.id',
@@ -6035,11 +6056,10 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___stripMetadata = 'pluginCreator.pluginOptions.stripMetadata',
   pluginCreator___pluginOptions___defaultQuality = 'pluginCreator.pluginOptions.defaultQuality',
   pluginCreator___pluginOptions___failOnError = 'pluginCreator.pluginOptions.failOnError',
-  pluginCreator___pluginOptions___trackingId = 'pluginCreator.pluginOptions.trackingId',
-  pluginCreator___pluginOptions___anonymize = 'pluginCreator.pluginOptions.anonymize',
-  pluginCreator___pluginOptions___head = 'pluginCreator.pluginOptions.head',
-  pluginCreator___pluginOptions___respectDNT = 'pluginCreator.pluginOptions.respectDNT',
-  pluginCreator___pluginOptions___pageTransitionDelay = 'pluginCreator.pluginOptions.pageTransitionDelay',
+  pluginCreator___pluginOptions___id = 'pluginCreator.pluginOptions.id',
+  pluginCreator___pluginOptions___includeInDevelopment = 'pluginCreator.pluginOptions.includeInDevelopment',
+  pluginCreator___pluginOptions___defaultDataLayer___type = 'pluginCreator.pluginOptions.defaultDataLayer.type',
+  pluginCreator___pluginOptions___routeChangeEventName = 'pluginCreator.pluginOptions.routeChangeEventName',
   pluginCreator___pluginOptions___spaceId = 'pluginCreator.pluginOptions.spaceId',
   pluginCreator___pluginOptions___accessToken = 'pluginCreator.pluginOptions.accessToken',
   pluginCreator___pluginOptions___host = 'pluginCreator.pluginOptions.host',
@@ -6102,6 +6122,7 @@ type SitePageFilterInput = {
   readonly children: Maybe<NodeFilterListInput>;
   readonly internal: Maybe<InternalFilterInput>;
   readonly isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  readonly context: Maybe<SitePageContextFilterInput>;
   readonly pluginCreator: Maybe<SitePluginFilterInput>;
   readonly pluginCreatorId: Maybe<StringQueryOperatorInput>;
   readonly componentPath: Maybe<StringQueryOperatorInput>;
@@ -6274,11 +6295,11 @@ enum SitePluginFieldsEnum {
   pluginOptions___stripMetadata = 'pluginOptions.stripMetadata',
   pluginOptions___defaultQuality = 'pluginOptions.defaultQuality',
   pluginOptions___failOnError = 'pluginOptions.failOnError',
-  pluginOptions___trackingId = 'pluginOptions.trackingId',
-  pluginOptions___anonymize = 'pluginOptions.anonymize',
-  pluginOptions___head = 'pluginOptions.head',
-  pluginOptions___respectDNT = 'pluginOptions.respectDNT',
-  pluginOptions___pageTransitionDelay = 'pluginOptions.pageTransitionDelay',
+  pluginOptions___id = 'pluginOptions.id',
+  pluginOptions___includeInDevelopment = 'pluginOptions.includeInDevelopment',
+  pluginOptions___defaultDataLayer___type = 'pluginOptions.defaultDataLayer.type',
+  pluginOptions___defaultDataLayer___value___platform = 'pluginOptions.defaultDataLayer.value.platform',
+  pluginOptions___routeChangeEventName = 'pluginOptions.routeChangeEventName',
   pluginOptions___spaceId = 'pluginOptions.spaceId',
   pluginOptions___accessToken = 'pluginOptions.accessToken',
   pluginOptions___host = 'pluginOptions.host',
@@ -6435,11 +6456,10 @@ type SitePluginPluginOptions = {
   readonly stripMetadata: Maybe<Scalars['Boolean']>;
   readonly defaultQuality: Maybe<Scalars['Int']>;
   readonly failOnError: Maybe<Scalars['Boolean']>;
-  readonly trackingId: Maybe<Scalars['String']>;
-  readonly anonymize: Maybe<Scalars['Boolean']>;
-  readonly head: Maybe<Scalars['Boolean']>;
-  readonly respectDNT: Maybe<Scalars['Boolean']>;
-  readonly pageTransitionDelay: Maybe<Scalars['Int']>;
+  readonly id: Maybe<Scalars['String']>;
+  readonly includeInDevelopment: Maybe<Scalars['Boolean']>;
+  readonly defaultDataLayer: Maybe<SitePluginPluginOptionsDefaultDataLayer>;
+  readonly routeChangeEventName: Maybe<Scalars['String']>;
   readonly spaceId: Maybe<Scalars['String']>;
   readonly accessToken: Maybe<Scalars['String']>;
   readonly host: Maybe<Scalars['String']>;
@@ -6469,6 +6489,24 @@ type SitePluginPluginOptions = {
   readonly pathCheck: Maybe<Scalars['Boolean']>;
 };
 
+type SitePluginPluginOptionsDefaultDataLayer = {
+  readonly type: Maybe<Scalars['String']>;
+  readonly value: Maybe<SitePluginPluginOptionsDefaultDataLayerValue>;
+};
+
+type SitePluginPluginOptionsDefaultDataLayerFilterInput = {
+  readonly type: Maybe<StringQueryOperatorInput>;
+  readonly value: Maybe<SitePluginPluginOptionsDefaultDataLayerValueFilterInput>;
+};
+
+type SitePluginPluginOptionsDefaultDataLayerValue = {
+  readonly platform: Maybe<Scalars['String']>;
+};
+
+type SitePluginPluginOptionsDefaultDataLayerValueFilterInput = {
+  readonly platform: Maybe<StringQueryOperatorInput>;
+};
+
 type SitePluginPluginOptionsFilterInput = {
   readonly plugins: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
   readonly sourceMap: Maybe<BooleanQueryOperatorInput>;
@@ -6482,11 +6520,10 @@ type SitePluginPluginOptionsFilterInput = {
   readonly stripMetadata: Maybe<BooleanQueryOperatorInput>;
   readonly defaultQuality: Maybe<IntQueryOperatorInput>;
   readonly failOnError: Maybe<BooleanQueryOperatorInput>;
-  readonly trackingId: Maybe<StringQueryOperatorInput>;
-  readonly anonymize: Maybe<BooleanQueryOperatorInput>;
-  readonly head: Maybe<BooleanQueryOperatorInput>;
-  readonly respectDNT: Maybe<BooleanQueryOperatorInput>;
-  readonly pageTransitionDelay: Maybe<IntQueryOperatorInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly includeInDevelopment: Maybe<BooleanQueryOperatorInput>;
+  readonly defaultDataLayer: Maybe<SitePluginPluginOptionsDefaultDataLayerFilterInput>;
+  readonly routeChangeEventName: Maybe<StringQueryOperatorInput>;
   readonly spaceId: Maybe<StringQueryOperatorInput>;
   readonly accessToken: Maybe<StringQueryOperatorInput>;
   readonly host: Maybe<StringQueryOperatorInput>;
@@ -6607,6 +6644,7 @@ type SiteSiteMetadata = {
   readonly author: Maybe<Scalars['String']>;
   readonly siteURL: Maybe<Scalars['String']>;
   readonly lang: Maybe<Scalars['String']>;
+  readonly keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 type SiteSiteMetadataFilterInput = {
@@ -6615,6 +6653,7 @@ type SiteSiteMetadataFilterInput = {
   readonly author: Maybe<StringQueryOperatorInput>;
   readonly siteURL: Maybe<StringQueryOperatorInput>;
   readonly lang: Maybe<StringQueryOperatorInput>;
+  readonly keywords: Maybe<StringQueryOperatorInput>;
 };
 
 type SiteSortInput = {
@@ -6649,14 +6688,130 @@ type WebPOptions = {
   readonly quality: Maybe<Scalars['Int']>;
 };
 
+type Unnamed_1_QueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+type Unnamed_1_Query = { readonly allContentfulPost: { readonly nodes: ReadonlyArray<(
+      Pick<ContentfulPost, 'title' | 'slug' | 'id' | 'node_locale' | 'excerpt' | 'updatedAt'>
+      & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html' | 'timeToRead'>> }>, readonly hero: Maybe<{ readonly fluid: Maybe<Pick<ContentfulFluid, 'src'>> }>, readonly author: Maybe<ReadonlyArray<Maybe<(
+        Pick<ContentfulAuthor, 'id' | 'name'>
+        & { readonly avatar: Maybe<{ readonly fluid: Maybe<Pick<ContentfulFluid, 'src'>> }> }
+      )>>>, readonly tags: Maybe<ReadonlyArray<Maybe<Pick<ContentfulTag, 'tagName' | 'slug'>>>> }
+    )> } };
+
+type Unnamed_2_QueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+type Unnamed_2_Query = { readonly allContentfulAuthor: { readonly nodes: ReadonlyArray<(
+      Pick<ContentfulAuthor, 'name' | 'slug' | 'id' | 'social'>
+      & { readonly avatar: Maybe<{ readonly fluid: Maybe<Pick<ContentfulFluid, 'src'>> }>, readonly personal_info: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly post: Maybe<ReadonlyArray<Maybe<(
+        Pick<ContentfulPost, 'slug' | 'title' | 'excerpt'>
+        & { readonly body: Maybe<Pick<contentfulPostBodyTextNode, 'id'>>, readonly tags: Maybe<ReadonlyArray<Maybe<Pick<ContentfulTag, 'slug' | 'tagName'>>>> }
+      )>>> }
+    )> } };
+
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PagesQueryQuery = { readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
-type homezvrzdevaddictsrccomponentslayoutseoTsx1522010811QueryVariables = Exact<{ [key: string]: never; }>;
+type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type homezvrzdevaddictsrccomponentslayoutseoTsx1522010811Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author' | 'lang'>> }> };
+type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author' | 'lang'>> }> };
+
+type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyImageSharpFixed_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyImageSharpFixed_withWebpFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyImageSharpFixed_withWebp_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyImageSharpFixed_noBase64Fragment = Pick<ImageSharpFixed, 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyImageSharpFixed_withWebp_noBase64Fragment = Pick<ImageSharpFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyImageSharpFluidFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyImageSharpFluidLimitPresentationSizeFragment = { maxHeight: ImageSharpFluid['presentationHeight'], maxWidth: ImageSharpFluid['presentationWidth'] };
+
+type GatsbyImageSharpFluid_tracedSVGFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyImageSharpFluid_withWebpFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyImageSharpResolutionsFragment = Pick<ImageSharpResolutions, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyImageSharpResolutions_tracedSVGFragment = Pick<ImageSharpResolutions, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyImageSharpResolutions_withWebpFragment = Pick<ImageSharpResolutions, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyImageSharpResolutions_withWebp_tracedSVGFragment = Pick<ImageSharpResolutions, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyImageSharpResolutions_noBase64Fragment = Pick<ImageSharpResolutions, 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyImageSharpResolutions_withWebp_noBase64Fragment = Pick<ImageSharpResolutions, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyImageSharpSizesFragment = Pick<ImageSharpSizes, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyImageSharpSizes_tracedSVGFragment = Pick<ImageSharpSizes, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyImageSharpSizes_withWebpFragment = Pick<ImageSharpSizes, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyContentfulFixedFragment = Pick<ContentfulFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyContentfulFixed_tracedSVGFragment = Pick<ContentfulFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyContentfulFixed_noBase64Fragment = Pick<ContentfulFixed, 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyContentfulFixed_withWebpFragment = Pick<ContentfulFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyContentfulFixed_withWebp_noBase64Fragment = Pick<ContentfulFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyContentfulFluidFragment = Pick<ContentfulFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyContentfulFluid_tracedSVGFragment = Pick<ContentfulFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyContentfulFluid_noBase64Fragment = Pick<ContentfulFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyContentfulFluid_withWebpFragment = Pick<ContentfulFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyContentfulFluid_withWebp_noBase64Fragment = Pick<ContentfulFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyContentfulResolutionsFragment = Pick<ContentfulResolutions, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyContentfulResolutions_tracedSVGFragment = Pick<ContentfulResolutions, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyContentfulResolutions_noBase64Fragment = Pick<ContentfulResolutions, 'width' | 'height' | 'src' | 'srcSet'>;
+
+type GatsbyContentfulResolutions_withWebpFragment = Pick<ContentfulResolutions, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyContentfulResolutions_withWebp_noBase64Fragment = Pick<ContentfulResolutions, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+
+type GatsbyContentfulSizesFragment = Pick<ContentfulSizes, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyContentfulSizes_tracedSVGFragment = Pick<ContentfulSizes, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyContentfulSizes_noBase64Fragment = Pick<ContentfulSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type GatsbyContentfulSizes_withWebpFragment = Pick<ContentfulSizes, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type GatsbyContentfulSizes_withWebp_noBase64Fragment = Pick<ContentfulSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
 }

@@ -1,4 +1,4 @@
-import { FooterMenu } from "components/layout";
+import { FooterMenu } from "components/ui/menu";
 import React from "react";
 import tw from "twin.macro";
 

@@ -1,14 +1,18 @@
-import { Footer, PageLayout, SEO } from "components/layout";
+import { Layout, SEO } from "components/layout";
 import React from "react";
 
 const IndexPage = (): JSX.Element => {
   return (
     <>
-      <SEO title="I AM" />
-      <PageLayout>
-        elements
+      <SEO seoTitle="I AM" seoDescription="some text" />
+      <Layout>
+        <Header />
+        <Hero />
+        <Services />
+        <LatestPosts />
+        <GetInTouch />
         <Footer />
-      </PageLayout>
+      </Layout>
     </>
   );
 };

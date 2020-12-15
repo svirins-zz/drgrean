@@ -1,13 +1,13 @@
 import closeSvg from "assets/close.svg";
+import { MENU_ITEMS } from "const";
 import { myContext } from "context";
 import { Link } from "gatsby";
-import { generateMenu } from "lib";
 import React, { useContext } from "react";
 import tw from "twin.macro";
 
 import styled from "@emotion/styled";
 
-export const MainMenu = (): JSX.Element => {
+export const HeaderMenu = (): JSX.Element => {
   const PageWrapper = tw.div`absolute top-0 right-0 z-50 flex flex-col items-center mt-4 mr-4 text-sm  h-screen`;
   const MenuWrapper = styled.div`
     ${tw`fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-900`};
@@ -30,8 +30,7 @@ export const MainMenu = (): JSX.Element => {
     z-index: 800;
   `;
   const context = useContext(myContext);
-  const menuItems = generateMenu();
-  const displayMenu = menuItems.map((menuItem, index) => {
+  const displayMenu = MENU_ITEMS.map((menuItem, index) => {
     return (
       <MenuItem key={index}>
         <Link

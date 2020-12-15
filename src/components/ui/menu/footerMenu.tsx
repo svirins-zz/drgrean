@@ -1,6 +1,6 @@
+import { MENU_ITEMS } from "const";
 import { myContext } from "context";
 import { Link } from "gatsby";
-import { generateMenu } from "lib";
 import React, { useContext } from "react";
 import tw from "twin.macro";
 
@@ -9,8 +9,7 @@ const MenuItem = tw.span`mr-3 hover:text-white  hover:underline text-sm 2xl:text
 
 export const FooterMenu = (): JSX.Element => {
   const context = useContext(myContext);
-  const menuItems = generateMenu();
-  const displayMenu = menuItems.map((menuItem, index) => {
+  const displayMenu =  MENU_ITEMS.map((menuItem, index) => {
     return (
       <MenuItem key={index}>
         <Link

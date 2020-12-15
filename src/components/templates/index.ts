@@ -1,2 +1,4 @@
-export { PageTemplate } from "./pageTemplate";
-export { markdownRenderer } from "./markdownRenderer";
+export { BlogPage } from "./blogPage";
+export { AuthorPage } from "./authorPage";
+export { BlogList } from "./blogList";
+export { AuthorList } from "./authorList";

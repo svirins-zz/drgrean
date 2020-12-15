@@ -9,6 +9,7 @@ module.exports = {
     author: "dr. Grean",
     siteURL: "https://addict.cf",
     lang: "ru",
+    keywords: ["Addiction", "Therapy", "Recovery", "Blog"],
   },
   flags: {
     PRESERVE_WEBPACK_CACHE: true,
@@ -23,10 +24,11 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-resolve-src",
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: "gatsby-plugin-google-tagmanager",
       options: {
-        trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_ID,
-        anonymize: true,
+        id: "GTM-TQ6RXGS",
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: "gatsby" },
       },
     },
     {
