@@ -13,8 +13,8 @@ export const query = graphql`
       nodes {
         title
         slug
-        id
         node_locale
+        updatedAt(formatString: "MMM DD YYYY")
         body {
           childMarkdownRemark {
             html
@@ -28,18 +28,24 @@ export const query = graphql`
           }
         }
         author {
-          id
           name
+          slug
           avatar {
             fluid(toFormat: WEBP, maxWidth: 240) {
               src
             }
           }
         }
-        updatedAt(formatString: "DDMMYY")
         tags {
-          tagName
-          slug
+          ... on ContentfulTag {
+            tagName
+            slug
+            image {
+              fluid(toFormat: WEBP, maxWidth: 120) {
+                src
+              }
+            }
+          }
         }
       }
     }

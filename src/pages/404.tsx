@@ -1,4 +1,4 @@
-import { PageLayout, SEO } from "components/layout";
+import { Layout, SEO } from "components/layout";
 import React from "react";
 import tw from "twin.macro";
 
@@ -20,15 +20,15 @@ const Text = tw.p`
 
 const Custom404 = (): JSX.Element => {
   return (
-    <PageLayout>
+    <Layout>
       <Wrapper>
-        <SEO title="Page Not Found" />
+        <SEO seoTitle="Page Not Found" seoDescription="Page Not Found" />
         <Main>
           <Heading>Oops!</Heading>
           <Text>We can`&lsquo;`t find the page that you are looking for.</Text>
         </Main>
       </Wrapper>
-    </PageLayout>
+    </Layout>
   );
 };
 

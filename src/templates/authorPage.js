@@ -13,7 +13,6 @@ export const query = graphql`
       nodes {
         name
         slug
-        id
         social
         avatar {
           fluid(maxWidth: 800, toFormat: WEBP) {
@@ -28,14 +27,7 @@ export const query = graphql`
         post {
           slug
           title
-          body {
-            id
-          }
           excerpt
-          tags {
-            slug
-            tagName
-          }
         }
       }
     }

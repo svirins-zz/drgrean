@@ -45,7 +45,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // create blog pages
   posts.data.allContentfulPost.edges.forEach(({ node }) => {
     createPage({
-      path: node.slug,
+      path: `/blog/${node.slug}`,
       component: blogPage,
       context: {
         // additional data can be passed via context
@@ -57,7 +57,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // create author pages
   authors.data.allContentfulAuthor.edges.forEach(({ node }) => {
     createPage({
-      path: node.slug,
+      path: `/authors/${node.slug}`,
       component: authorPage,
       context: {
         // additional data can be passed via context
