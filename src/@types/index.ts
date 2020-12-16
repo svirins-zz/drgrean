@@ -20,6 +20,9 @@ export interface ImageProps {
 export type ContextProps = {
   menuVisible: { isVisible: boolean };
   modalVisible: { isVisible: boolean };
+  darkMode: { isDark: boolean };
+  switchMode: () => void;
+  showFullscreenMenu: () => void;
   handleSelect: () => void;
   closeMenu: () => void;
   showMenu: () => void;

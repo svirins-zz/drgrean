@@ -27,16 +27,19 @@ export const SEO = ({
     `
   );
   const context = useContext(myContext);
-  const className =
+  const classMenuVisible =
     context.menuVisible?.isVisible || context.modalVisible?.isVisible
       ? "scroll-off"
       : "scroll-on";
+  const classDarkMode = context.darkMode?.isDark ? "dark" : "";
+  // TODO: check if add class to html tag works
   return (
     <Helmet
       htmlAttributes={{
         lang: site.siteMetadata.lang ?? "en",
+        class: classDarkMode,
       }}
-      bodyAttributes={{ class: className }}
+      bodyAttributes={{ class: classMenuVisible }}
       title={`${site.siteMetadata.title} | ${seoTitle}`}
       meta={[
         {

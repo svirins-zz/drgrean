@@ -12,12 +12,25 @@ const Provider = ({ children }: AuxProps) => {
   const [modalVisible, setModalVisible] = useImmer({
     isVisible: false,
   });
+  const [darkMode, setDarkMode] = useImmer({
+    isDark: false,
+  });
+  const switchMode = () => {
+    setDarkMode((draft) => {
+      draft.isDark = !darkMode.isDark;
+    });
+  };
+
+  const showFullscreenMenu = () => null;
 
   return (
     <myContext.Provider
       value={{
         menuVisible,
         modalVisible,
+        showFullscreenMenu,
+        darkMode,
+        switchMode,
         handleSelect: () => {
           setMenuVisible((draft) => {
             draft.isVisible = false;

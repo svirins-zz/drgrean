@@ -1,10 +1,10 @@
+import { Footer, Header } from "components/ui";
+import { FullscreenMenu } from "components/ui/menu";
 import React from "react";
 import tw from "twin.macro";
 import { GlobalStyles } from "twin.macro";
 
-import { Footer, Header } from "../ui";
-
-const Container = tw.main`w-screen min-h-screen`;
+const Container = tw.main`w-screen min-h-screen bg-white`;
 
 export const Layout = ({
   children,
@@ -13,9 +13,10 @@ export const Layout = ({
     <>
       <GlobalStyles />
       <Container>
-        {/* <Header /> */}
+        <FullscreenMenu />
+        <Header />
         {children}
-        {/* <Footer /> */}
+        <Footer />
       </Container>
     </>
   );
