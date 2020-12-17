@@ -15,8 +15,8 @@ export const query = graphql`
         slug
         social
         avatar {
-          fluid(maxWidth: 800, toFormat: WEBP) {
-            src
+          fluid(maxWidth: 480) {
+            ...GatsbyContentfulFluid_withWebp
           }
         }
         personal_info {

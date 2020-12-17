@@ -8,7 +8,7 @@ const Button = tw.button`ml-4 w-6 h-6 flex flex-col`;
 // TODO: add switch animation
 export const DarkModeSwitch = (): JSX.Element => {
   const context = useContext(myContext);
-  const mode = context.darkMode.isDark ? moon : sun;
+  const mode = context.darkMode?.isDark ? moon : sun;
   return (
     <Button onClick={context.switchMode}>
       <img src={mode} alt="toggle dark mode" />

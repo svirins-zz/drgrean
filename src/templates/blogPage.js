@@ -23,16 +23,16 @@ export const query = graphql`
         }
         excerpt
         hero {
-          fluid(toFormat: WEBP, maxWidth: 1024) {
-            src
+          fluid {
+            ...GatsbyContentfulFluid_withWebp
           }
         }
         author {
           name
           slug
           avatar {
-            fluid(toFormat: WEBP, maxWidth: 240) {
-              src
+            fluid(maxWidth: 480) {
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }
@@ -41,8 +41,8 @@ export const query = graphql`
             tagName
             slug
             image {
-              fluid(toFormat: WEBP, maxWidth: 120) {
-                src
+              fluid(maxWidth: 240) {
+                ...GatsbyContentfulFluid_withWebp
               }
             }
           }

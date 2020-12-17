@@ -30,12 +30,24 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
   },
   overrides: [
-    // Override some TypeScript rules just for .js files
     {
       files: ["*.js"],
       rules: {
         "@typescript-eslint/no-var-requires": "off", //
       },
+    },
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "eol-last": "off",
+        "prettier/prettier": "off"
+      },
+    },
+    {
+      "files": ["*.tsx", "*.ts", "*.jsx", "*.js"],
+      "processor": "@graphql-eslint/graphql"
     },
   ],
 };
