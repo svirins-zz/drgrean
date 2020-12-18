@@ -1,5 +1,4 @@
 import { Footer, Header } from "components/ui";
-import { FullscreenMenu } from "components/ui/menu";
 import React from "react";
 import tw from "twin.macro";
 import { GlobalStyles } from "twin.macro";
@@ -13,7 +12,6 @@ export const Layout = ({
     <>
       <GlobalStyles />
       <Container>
-        <FullscreenMenu />
         <Header />
         {children}
         <Footer />

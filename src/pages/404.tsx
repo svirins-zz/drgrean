@@ -27,3 +27,4 @@ const Custom404 = (): JSX.Element => {
 };
 
 export default Custom404;
+ 
