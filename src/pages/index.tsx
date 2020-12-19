@@ -1,5 +1,5 @@
 import { Layout, SEO } from "components/layout";
-import { Contact, Hero, Latest, Services } from "components/ui";
+import { Authors, Contact, Hero, Latest, MainPage } from "components/ui";
 import React from "react";
 
 const IndexPage = (): JSX.Element => {
@@ -8,7 +8,8 @@ const IndexPage = (): JSX.Element => {
       <SEO seoTitle="I AM" seoDescription="some text" />
       <Layout>
         <Hero />
-        <Services />
+        <MainPage />
+        <Authors />
         <Latest />
         <Contact />
       </Layout>

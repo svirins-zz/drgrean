@@ -3,7 +3,7 @@ import React from "react";
 import tw from "twin.macro";
 import { GlobalStyles } from "twin.macro";
 
-const Container = tw.main`w-screen min-h-screen bg-nord0`;
+const Container = tw.main`text-gray-800 antialiased`;
 
 export const Layout = ({
   children,
@@ -12,7 +12,7 @@ export const Layout = ({
     <>
       <GlobalStyles />
       <Container>
-        <Header />
+        <Header transparent={true} />
         {children}
         <Footer />
       </Container>
